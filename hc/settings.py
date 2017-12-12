@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 HOST = ""
 SECRET_KEY = "---"
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
 DEFAULT_FROM_EMAIL = 'healthchecks@example.org'
 USE_PAYMENTS = False

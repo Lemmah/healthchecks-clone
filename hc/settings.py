@@ -15,10 +15,10 @@ import warnings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-HOST = "localhost"
+HOST = ""
 SECRET_KEY = "---"
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['*', '.us-east-1.elasticbeanstalk.com', '204.236.212.82']
 DEFAULT_FROM_EMAIL = 'healthchecks@example.org'
 USE_PAYMENTS = False
 REGISTRATION_OPEN = True

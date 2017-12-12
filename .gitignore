@@ -4,3 +4,7 @@ __pycache__/
 hc.sqlite
 hc/local_settings.py
 static-collected
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

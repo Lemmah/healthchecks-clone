@@ -15,7 +15,7 @@ import warnings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-HOST = ""
+HOST = "healthchecksdbinstance.ca6ibazvkqva.us-east-1.rds.amazonaws.com"
 SECRET_KEY = "---"
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
@@ -94,7 +94,8 @@ if os.environ.get("DB") == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
+            'USER': 'lemmah',
+            'PASSWORD' : 'Aminsecure2',
             'NAME': 'hc',
             'TEST': {'CHARSET': 'UTF8'}
         }

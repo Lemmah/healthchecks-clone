@@ -94,10 +94,11 @@ if os.environ.get("DB") == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'HOST': 'healthchecksdbinstance.ca6ibazvkqva.us-east-1.rds.amazonaws.com',
-            'USER': 'lemmah',
-            'PASSWORD' : 'Aminsecure2',
-            'NAME': 'hc',
+            'HOST': os.environ['RDS_HOST'],
+            'PORT': os.environ['RDS_PORT'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD' : os.environ['RDS_PASS'],
+            'NAME': os.environ['RDS_DB_NAME'],
             'TEST': {'CHARSET': 'UTF8'}
         }
     }

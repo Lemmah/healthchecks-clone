@@ -93,7 +93,7 @@ DATABASES = {
 if os.environ.get("DB") == "postgres":
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'HOST': os.environ['RDS_HOST'],
             'PORT': os.environ['RDS_PORT'],
             'USER': os.environ['RDS_USERNAME'],

@@ -41,6 +41,7 @@ node {
         try {
             sh '''
                 . ../bin/activate
+                python -V
                 ./manage.py test
                 deactivate
                '''

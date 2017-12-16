@@ -30,7 +30,7 @@ node {
         sh '''
             . bin/activate
             sudo pip install django==1.11.6 --upgrade
-            python manage.py collectstatic --noinput
+            ./manage.py collectstatic --noinput
             deactivate
             '''
     }
@@ -41,7 +41,7 @@ node {
         try {
             sh '''
                 . ../bin/activate
-                python manage.py test
+                ./manage.py test
                 deactivate
                '''
         }

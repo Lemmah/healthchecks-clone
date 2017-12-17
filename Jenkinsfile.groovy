@@ -2,25 +2,14 @@
 // This deployment script assumes that there is only a single Jenkins server (master) and there are no agents.
 
 node {
+
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
-    stage("Attempt to run the script externally"){
+    stage("Setup Project Env (venv)") {
         sh '''
-            chmod 777 setup.sh
-            ./setup.sh
+            chmod 777 setup-scripts/*
+            ./setup-scripts/setup-env.sh
             '''
-    }
-    
-    stage("Set up Python Runtime Env") {
-        sh '''
-           sudo apt-get install -y python-virtualenv
-           sudo apt-get install -y python3-pip 
-           sudo apt-get install -y python3-venv
-           '''
-    }
-    stage("Install Python Virtual Env") {
-        sh 'python3 -V'
-        sh 'python3 -m venv .'
     }  
     
     // The stage below is attempting to get the latest version of our application code.
@@ -31,23 +20,16 @@ node {
     // Then we install our requirements
     stage ("Install Application Dependencies") {
         sh '''
-            ls
-            . bin/activate
-            pip install -r requirements.txt
-            deactivate
+            ./setup-scripts/setup-project.sh
             '''
     }
     
     // Typically, django recommends that all the static assets such as images and css are to be collected to a single folder and
     // served separately outside the django application via apache or a CDN. This command will gather up all the static assets and
     // ready them for deployment.
-    stage ("Collect Static files") {
+    stage ("Setup Project database") {
         sh '''
-            . bin/activate
-            python -V
-            pip install django==1.11.6 --upgrade
-            ./manage.py collectstatic --noinput
-            deactivate
+            ./setup-scripts/setup-db.sh
             '''
     }
   
@@ -56,9 +38,8 @@ node {
         def testsError = null
         try {
             sh '''
-                . ../bin/activate
+                cd ~/healthchecksapp/healthchecks-clone
                 ./manage.py test
-                deactivate
                '''
         }
         catch(err) {

@@ -46,7 +46,7 @@ fi
 
 cd ~/healthcheckapp/healthchecks
 
-# Copy files
+# Use example local settings
 cp hc/local_settings.py.example hc/local_settings.py
 
 cd ~/healthcheckapp/healthchecks

@@ -28,7 +28,7 @@ node {
     stage ("Install Application Dependencies") {
         sh '''
             . hc-venv/bin/activate
-            pip install -r healthchecks-clone/requirements.txt
+            pip install -r ~/healthchecks-clone/requirements.txt
             pip install mock
             deactivate
             '''

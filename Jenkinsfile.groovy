@@ -6,9 +6,9 @@ node {
     // This way you can manage all of your depedencies without affecting the rest of your system.
     stage("Ensure that python environment is set up.") {
         sh '''
-           sudo apt-get install python-virtualenv
-           sudo apt-get install python3-pip 
-           sudo apt-get install python3-venv
+           sudo apt-get install -y python-virtualenv
+           sudo apt-get install -y python3-pip 
+           sudo apt-get install -y python3-venv
            '''
     }
     stage("Install Python Virtual Enviroment") {

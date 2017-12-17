@@ -12,6 +12,7 @@ node {
            '''
     }
     stage("Install Python Virtual Env") {
+        sh 'python3 -V'
         sh 'python3 -m venv .'
     }  
     

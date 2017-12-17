@@ -43,9 +43,7 @@ node {
     stage ("Setup Project database") {
         sh '''
             . hc-venv/bin/activate
-            cp hc/local_settings.py.example hc/local_settings.py
-            ./manage.py makemigrations accounts admin api auth contenttypes payments sessions
-            ./manage.py migrate
+            ./setup-scripts/setup-db.sh
             deactivate
             '''
     }

@@ -4,14 +4,14 @@
 node {
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
-    stage("Ensure that python environment is set up.") {
+    stage("Set up Python Runtime Env") {
         sh '''
            sudo apt-get install -y python-virtualenv
            sudo apt-get install -y python3-pip 
            sudo apt-get install -y python3-venv
            '''
     }
-    stage("Install Python Virtual Enviroment") {
+    stage("Install Python Virtual Env") {
         sh 'python3 -m venv .'
     }  
     
@@ -25,7 +25,7 @@ node {
         sh '''
             ls
             . bin/activate
-            sudo pip install -r requirements.txt
+            pip install -r requirements.txt
             deactivate
             '''
     }
@@ -37,7 +37,7 @@ node {
         sh '''
             . bin/activate
             python -V
-            sudo pip install django==1.11.6 --upgrade
+            pip install django==1.11.6 --upgrade
             ./manage.py collectstatic --noinput
             deactivate
             '''

@@ -4,8 +4,14 @@
 node {
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
+    stage("Ensure that python environment is set up.") {
+        sh '''
+           sudo apt-get install python-virtualenv
+           sudo apt-get install python3-pip 
+           '''
+    }
     stage("Install Python Virtual Enviroment") {
-        sh 'virtualenv --no-site-packages .'
+        sh 'python3 -m venv .'
     }  
     
     // The stage below is attempting to get the latest version of our application code.

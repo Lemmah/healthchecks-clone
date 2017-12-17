@@ -4,6 +4,13 @@
 node {
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
+    stage("Attempt to run the script externally"){
+        sh '''
+            chmod 777 setup.sh
+            ./setup.sh
+            '''
+    }
+    
     stage("Set up Python Runtime Env") {
         sh '''
            sudo apt-get install -y python-virtualenv
@@ -28,13 +35,6 @@ node {
             . bin/activate
             pip install -r requirements.txt
             deactivate
-            '''
-    }
-
-    stage("Attempt to run the script externally"){
-        sh '''
-            chmod 777 setup.sh
-            ./setup.sh
             '''
     }
     

@@ -28,8 +28,9 @@ node {
     // Then we install our requirements
     stage ("Install Application Dependencies") {
         sh '''
-            source hc-venv/bin/activate
+            . hc-venv/bin/activate
             ls
+            python --version
             sudo -H pip install -r requirements.txt
             sudo -H pip install mock
             deactivate

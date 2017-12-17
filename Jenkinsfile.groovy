@@ -8,6 +8,7 @@ node {
         sh '''
            sudo apt-get install python-virtualenv
            sudo apt-get install python3-pip 
+           sudo apt-get install python3-venv
            '''
     }
     stage("Install Python Virtual Enviroment") {

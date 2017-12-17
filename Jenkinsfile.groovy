@@ -30,7 +30,7 @@ node {
         sh '''
             . hc-venv/bin/activate
             ls
-            pip install -r healthchecks-clone/requirements.txt
+            pip install -r requirements.txt
             pip install mock
             deactivate
             '''
@@ -42,7 +42,6 @@ node {
     stage ("Setup Project database") {
         sh '''
             . hc-venv/bin/activate
-            cd ~/healthchecks-clone/
             ./manage.py makemigrations accounts admin api auth contenttypes payments sessions
             ./manage.py migrate
             deactivate
@@ -55,7 +54,6 @@ node {
         try {
             sh '''
                 . hc-venv/bin/activate
-                cd ~/healthchecks-clone/
                 ./manage.py test
                 deactivate
                '''

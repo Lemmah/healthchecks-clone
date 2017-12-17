@@ -2,13 +2,20 @@
 // This deployment script assumes that there is only a single Jenkins server (master) and there are no agents.
 
 node {
-
+    // Just incase the machine is not configured for python testing and dev
+    stage("Setup Project Env") {
+        sh '''
+            sudo apt-get -y install python-virtualenv
+            sudo apt-get -y install python3-pip
+            '''
+    }
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
-    stage("Setup Project Env (venv)") {
+    stage("Create Project Virtual Env") {
         sh '''
-            chmod 777 setup-scripts/*
-            ./setup-scripts/setup-env.sh
+            virtualenv --python=python3 hc-venv
+            . hc-venv/bin/activate
+            deactivate
             '''
     }  
     
@@ -20,7 +27,10 @@ node {
     // Then we install our requirements
     stage ("Install Application Dependencies") {
         sh '''
-            ./setup-scripts/setup-project.sh
+            . hc-venv/bin/activate
+            pip install -r healthcheck-clone/requirements.txt
+            pip install mock
+            deactivate
             '''
     }
     
@@ -29,7 +39,11 @@ node {
     // ready them for deployment.
     stage ("Setup Project database") {
         sh '''
-            ./setup-scripts/setup-db.sh
+            . hc-venv/bin/activate
+            cd ~/healthchecks-clone/
+            ./manage.py makemigrations accounts admin api auth contenttypes payments sessions
+            ./manage.py migrate
+            deactivate
             '''
     }
   
@@ -38,8 +52,10 @@ node {
         def testsError = null
         try {
             sh '''
-                cd ~/healthchecksapp/healthchecks-clone
+                . hc-venv/bin/activate
+                cd ~/healthchecks-clone/
                 ./manage.py test
+                deactivate
                '''
         }
         catch(err) {

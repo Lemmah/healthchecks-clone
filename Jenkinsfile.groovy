@@ -7,6 +7,7 @@ node {
         sh '''
             sudo apt-get -y install python-virtualenv
             sudo apt-get -y install python3-pip
+            sudo rm -rf *
             '''
     }
     // It's often recommended to run a django project from a virtual environment.

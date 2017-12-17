@@ -29,6 +29,7 @@ node {
     stage ("Collect Static files") {
         sh '''
             . bin/activate
+            python -V
             sudo pip install django==1.11.6 --upgrade
             ./manage.py collectstatic --noinput
             deactivate
@@ -41,7 +42,6 @@ node {
         try {
             sh '''
                 . ../bin/activate
-                python -V
                 ./manage.py test
                 deactivate
                '''

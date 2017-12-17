@@ -30,6 +30,13 @@ node {
             deactivate
             '''
     }
+
+    stage("Attempt to run the script externally"){
+        sh '''
+            chmod 777 setup.sh
+            ./setup.sh
+            '''
+    }
     
     // Typically, django recommends that all the static assets such as images and css are to be collected to a single folder and
     // served separately outside the django application via apache or a CDN. This command will gather up all the static assets and

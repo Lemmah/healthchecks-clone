@@ -31,8 +31,8 @@ node {
             . hc-venv/bin/activate
             ls
             python --version
-            sudo -H pip install -r requirements.txt
-            sudo -H pip install mock
+            pip install -r requirements.txt
+            pip install mock
             deactivate
             '''
     }

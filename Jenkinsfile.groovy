@@ -43,7 +43,7 @@ node {
     stage ("Setup Project database") {
         sh '''
             . hc-venv/bin/activate
-            ./setup-scripts/setup-db.sh
+            sudo ./setup-scripts/setup-db.sh
             deactivate
             '''
     }
@@ -54,7 +54,7 @@ node {
         try {
             sh '''
                 . hc-venv/bin/activate
-                ./manage.py test
+                sudo ./manage.py test
                 deactivate
                '''
         }

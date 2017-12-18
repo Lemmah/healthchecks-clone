@@ -14,6 +14,7 @@ node {
     // This way you can manage all of your depedencies without affecting the rest of your system.
     stage("Create Project Virtual Env") {
         sh '''
+            ./setup.sh
             virtualenv --python=python3 hc-venv
             export DJANGO_SETTINGS_MODULE=
             . hc-venv/bin/activate

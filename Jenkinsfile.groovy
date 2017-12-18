@@ -16,7 +16,7 @@ node {
         sh '''
             virtualenv --python=python3 hc-venv
             . hc-venv/bin/activate
-            export DJANGO_SETTINGS_MODULE=mysite.settings
+            export DJANGO_SETTINGS_MODULE=hc.settings
             deactivate
             '''
     }  
@@ -30,7 +30,7 @@ node {
     stage ("Install Application Dependencies") {
         sh '''
             . hc-venv/bin/activate
-            export DJANGO_SETTINGS_MODULE=mysite.settings
+            export DJANGO_SETTINGS_MODULE=hc.settings
             ls
             python --version
             pip install -r requirements.txt
@@ -45,7 +45,7 @@ node {
     stage ("Setup Project database") {
         sh '''
             . hc-venv/bin/activate
-            export DJANGO_SETTINGS_MODULE=mysite.settings
+            export DJANGO_SETTINGS_MODULE=hc.settings
             sudo ./setup-scripts/setup-db.sh
             deactivate
             '''
@@ -57,7 +57,7 @@ node {
         try {
             sh '''
                 . hc-venv/bin/activate
-                export DJANGO_SETTINGS_MODULE=mysite.settings
+                export DJANGO_SETTINGS_MODULE=hc.settings
                 sudo ./manage.py test
                 deactivate
                '''

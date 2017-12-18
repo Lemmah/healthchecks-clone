@@ -15,6 +15,7 @@ node {
     stage("Create Project Virtual Env") {
         sh '''
             virtualenv --python=python3 hc-venv
+            export DJANGO_SETTINGS_MODULE=hc.settings
             . hc-venv/bin/activate
             deactivate
             '''
@@ -29,6 +30,7 @@ node {
     stage ("Install Application Dependencies") {
         sh '''
             . hc-venv/bin/activate
+            export DJANGO_SETTINGS_MODULE=hc.settings
             ls
             python --version
             pip install -r requirements.txt
@@ -43,6 +45,7 @@ node {
     stage ("Setup Project database") {
         sh '''
             . hc-venv/bin/activate
+            export DJANGO_SETTINGS_MODULE=hc.settings
             cp hc/local_settings.py.example hc/local_settings.py
             django-admin.py makemigrations accounts admin api auth contenttypes payments sessions
             django-admin.py migrate
@@ -56,6 +59,7 @@ node {
         try {
             sh '''
                 . hc-venv/bin/activate
+                export DJANGO_SETTINGS_MODULE=hc.settings
                 django-admin.py test
                 deactivate
                '''
